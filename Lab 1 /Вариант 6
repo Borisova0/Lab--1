@@ -1,0 +1,6 @@
+base = float(input("10: "))
+height = float(input("6 : "))
+
+area = base * height / 2
+
+print("30.3:", area)
