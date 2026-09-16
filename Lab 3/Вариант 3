@@ -1,0 +1,33 @@
+class Car:
+    def __init__(self, brand, model, year, speed=0):
+        self.brand = brand
+        self.model = model
+        self.year = year
+        self.speed = speed
+
+    def accelerate(self, value):
+        self.speed += value
+
+    def stop(self):
+        self.speed = 0
+
+    def show_info(self):
+        print("Марка:", self.brand)
+        print("Модель:", self.model)
+        print("Год:", self.year)
+        print("Скорость:", self.speed, "км/ч")
+
+
+car1 = Car("Toyota", "Camry", 2022)
+car2 = Car("BMW", "M5", 2023)
+car3 = Car("Mercedes", "E-Class", 2021)
+
+car1.accelerate(60)
+car1.show_info()
+
+car2.accelerate(100)
+car2.show_info()
+
+car3.accelerate(80)
+car3.stop()
+car3.show_info()
