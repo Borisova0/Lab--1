@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Визитка студента</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="avatar">👩🏻‍💻</div>
+            <h1>Визитка студента</h1>
+            <p>Моя персональная страница</p>
+        </header>
+
+        <nav class="tabs" aria-label="Разделы сайта">
+            <button class="tab active" data-page="about">
+                О себе
+            </button>
+            <button class="tab" data-page="skills">
+                Навыки
+            </button>
+            <button class="tab" data-page="contacts">
+                Контакты
+            </button>
+        </nav>
+
+        <main id="content" aria-live="polite"></main>
+
+        <footer>
+            <p>© 2026 | Лабораторная работа №7</p>
+        </footer>
+    </div>
+
+</body>
+</html>
+const pages = {
+    about: {
+        title: "О себе 👋",
+        description: "Привет! Добро пожаловать на мою персональную страницу.",
+        items: [
+            {
+                name: "Имя",
+                value: "Дилинур"
+            },
+            {
+                name: "Специальность",
+                value: "Информационные технологии"
+            },
+            {
+                name: "Учебное заведение",
+                value: "АТУ "
+            },
+            {
+                name: "Увлечения",
+                value: "Программирование, музыка, фильмы "
+            }
+        ]
+    },
+
+    skills: {
+        title: "Мои навыки 💻",
+        description: "Технологии и инструменты, которые я изучаю.",
+        items: [
+            {
+                name: "HTML",
+                value: "Создание структуры сайтов"
+            },
+            {
+                name: "CSS",
+                value: "Оформление веб-страниц"
+            },
+            {
+                name: "JavaScript",
+                value: "Создание интерактивных элементов"
+            },
+            {
+                name: "Python",
+                value: "Основы программирования"
+            }
+        ]
+    },
+
+    contacts: {
+        title: "Мои контакты 📩",
+        description: "Здесь можно найти информацию для связи со мной.",
+        items: [
+            {
+                name: "Электронная почта",
+                value: "student@example.com"
+            },
+            {
+                name: "Телефон",
+                value: "+7 700 000 00 00"
+            },
+            {
+                name: "Telegram",
+                value: "@student"
+            },
+            {
+                name: "Город",
+                value: "Алматы, Казахстан"
+            }
+        ]
+    }
+};
+
+const content = document.getElementById("content");
+const buttons = document.querySelectorAll(".tab");
+
+// Функция отображения выбранной страницы
+function showPage(pageName) {
+    const page = pages[pageName];
+
+    if (!page) {
+        content.textContent = "Страница не найдена";
+        return;
+    }
+
+    // Очистка предыдущего содержимого
+    content.replaceChildren();
+
+    // Создание заголовка
+    const title = document.createElement("h2");
+    title.textContent = page.title;
+
+    // Создание описания
+    const description = document.createElement("p");
+    description.className = "description";
+    description.textContent = page.description;
+
+    // Контейнер для карточек
+    const grid = document.createElement("div");
+    grid.className = "info-grid";
+
+    // Создание карточек через цикл
+    page.items.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "info-card";
+
+        const heading = document.createElement("h3");
+        heading.textContent = item.name;
+
+        const text = document.createElement("p");
+        text.textContent = item.value;
+
+        card.append(heading, text);
+        grid.appendChild(card);
+    });
+
+    content.append(title, description, grid);
+
+    // Выделение активной вкладки
+    buttons.forEach(button => {
+        const isActive = button.dataset.page === pageName;
+
+        button.classList.toggle("active", isActive);
+        button.setAttribute("aria-current", isActive ? "page" : "false");
+    });
+
+    // Запоминание последней вкладки
+    try {
+        localStorage.setItem("lastPage", pageName);
+    } catch (error) {
+        console.log("Сохранение вкладки недоступно");
+    }
+}
+
+// Обработка нажатий на вкладки
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+        showPage(button.dataset.page);
+    });
+});
+
+// Загрузка последней открытой вкладки
+let savedPage = "about";
+
+try {
+    savedPage = localStorage.getItem("lastPage") || "about";
+} catch (error) {
+    savedPage = "about";
+}
+
+showPage(pages[savedPage] ? savedPage : "about");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ece8ff, #fce9f2);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    color: #333;
+}
+
+.container {
+    width: 100%;
+    max-width: 750px;
+    background: white;
+    border-radius: 25px;
+    padding: 35px;
+    box-shadow: 0 15px 40px rgba(80, 60, 130, 0.15);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.avatar {
+    width: 90px;
+    height: 90px;
+    background: #eee7ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 43px;
+    margin: 0 auto 18px;
+}
+
+h1 {
+    color: #6851ac;
+    font-size: 29px;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #888;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    background: #f5f2fc;
+    border-radius: 15px;
+    padding: 7px;
+    margin-bottom: 30px;
+}
+
+.tab {
+    flex: 1;
+    padding: 14px 8px;
+    border: none;
+    border-radius: 11px;
+    background: transparent;
+    cursor: pointer;
+    color: #777;
+    font-size: 15px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.tab:hover {
+    background: #e7ddff;
+}
+
+.tab.active {
+    background: #8063c9;
+    color: white;
+    box-shadow: 0 4px 10px rgba(128, 99, 201, 0.2);
+}
+
+#content {
+    min-height: 270px;
+    animation: fadeIn 0.3s ease;
+}
+
+#content h2 {
+    color: #6851ac;
+    margin-bottom: 12px;
+}
+
+.description {
+    color: #777;
+    margin-bottom: 23px;
+    line-height: 1.6;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.info-card {
+    background: #f8f6ff;
+    border: 1px solid #eee8ff;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.info-card h3 {
+    color: #8063c9;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.info-card p {
+    font-size: 15px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+footer {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    color: #999;
+    font-size: 13px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 550px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .tab {
+        font-size: 13px;
+        padding: 12px 5px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
