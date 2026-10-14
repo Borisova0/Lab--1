@@ -1,0 +1,303 @@
+// Данные всех разделов сайта
+
+const pages = {
+
+    about: {
+        tag: "01 / ОБО МНЕ",
+        title: "Привет, я Алексей 👋",
+        description: "Я студент направления информационных технологий. Интересуюсь программированием, созданием сайтов и современными IT-технологиями.",
+
+        type: "info",
+
+        items: [
+            {
+                name: "🎓 Образование",
+                value: "Студент университета, специальность — Информационные системы."
+            },
+            {
+                name: "💻 Направление",
+                value: "Изучаю веб-разработку и программирование."
+            },
+            {
+                name: "🎯 Моя цель",
+                value: "Стать Frontend-разработчиком и создавать современные сайты."
+            },
+            {
+                name: "🚀 Интересы",
+                value: "IT-технологии, компьютерные игры, дизайн и музыка."
+            }
+        ]
+    },
+
+    skills: {
+        tag: "02 / МОИ НАВЫКИ",
+        title: "Технические навыки 💻",
+        description: "Технологии, которые я изучаю и применяю в учебных проектах.",
+
+        type: "skills",
+
+        items: [
+            {
+                name: "HTML",
+                level: 90
+            },
+            {
+                name: "CSS",
+                level: 80
+            },
+            {
+                name: "JavaScript",
+                level: 65
+            },
+            {
+                name: "Python",
+                level: 70
+            },
+            {
+                name: "MySQL",
+                level: 60
+            },
+            {
+                name: "Git и GitHub",
+                level: 75
+            }
+        ]
+    },
+
+    projects: {
+        tag: "03 / ПОРТФОЛИО",
+        title: "Мои проекты 📁",
+        description: "Примеры учебных проектов, выполненных во время обучения.",
+
+        type: "projects",
+
+        items: [
+            {
+                name: "🌐 Персональный сайт",
+                value: "Создание личного сайта с информацией о студенте, его навыках и контактах.",
+                tech: "HTML / CSS / JavaScript"
+            },
+            {
+                name: "🧮 Онлайн-калькулятор",
+                value: "Калькулятор для выполнения основных математических операций.",
+                tech: "HTML / CSS / JavaScript"
+            },
+            {
+                name: "📋 Список задач",
+                value: "Приложение для добавления, удаления и отметки выполненных задач.",
+                tech: "JavaScript / DOM"
+            },
+            {
+                name: "🗃️ База данных",
+                value: "Учебная база данных для хранения информации о студентах.",
+                tech: "MySQL / SQL"
+            }
+        ]
+    },
+
+    contacts: {
+        tag: "04 / СВЯЗЬ",
+        title: "Мои контакты ✉️",
+        description: "Контактная информация для общения и сотрудничества.",
+
+        type: "info",
+
+        items: [
+            {
+                name: "📧 Email",
+                value: "alex.student@example.com"
+            },
+            {
+                name: "📱 Телефон",
+                value: "+7 700 000 00 00"
+            },
+            {
+                name: "💬 Telegram",
+                value: "@alex_student"
+            },
+            {
+                name: "📍 Местоположение",
+                value: "Алматы, Казахстан"
+            }
+        ]
+    }
+};
+
+
+// Находим элементы страницы
+
+const content = document.getElementById("content");
+
+const buttons = document.querySelectorAll(".nav-btn");
+
+
+// Функция создания HTML-элементов
+
+function createElement(tag, className, text) {
+    const element = document.createElement(tag);
+
+    if (className) {
+        element.className = className;
+    }
+
+    if (text !== undefined) {
+        element.textContent = text;
+    }
+
+    return element;
+}
+
+
+// Функция переключения разделов
+
+function showPage(pageName) {
+
+    const page = pages[pageName];
+
+    // Проверка существования страницы
+    if (!page) {
+        content.textContent = "Раздел не найден";
+        return;
+    }
+
+    // Очистка предыдущего содержимого
+    content.replaceChildren();
+
+    // Создание заголовка и описания
+    const tag = createElement(
+        "p", "page-tag", page.tag
+    );
+
+    const title = createElement(
+        "h1", "page-title", page.title
+    );
+
+    const description = createElement(
+        "p", "description", page.description
+    );
+
+    // Контейнер карточек
+    const cards = createElement("div", "cards");
+
+    // Цикл создания карточек
+    page.items.forEach(item => {
+
+        const card = createElement("div", "card");
+
+        // Если открыта вкладка "Навыки"
+        if (page.type === "skills") {
+
+            const header = createElement(
+                "div", "skill-header"
+            );
+
+            const skillName = createElement(
+                "h3", "", item.name
+            );
+
+            const percent = createElement(
+                "span", "skill-percent",
+                item.level + "%"
+            );
+
+            header.append(skillName, percent);
+
+            const progress = createElement(
+                "div", "progress"
+            );
+
+            const bar = createElement(
+                "div", "progress-bar"
+            );
+
+            bar.style.width = item.level + "%";
+
+            progress.appendChild(bar);
+
+            card.append(header, progress);
+
+        } else {
+
+            // Обычная карточка
+            const heading = createElement(
+                "h3", "", item.name
+            );
+
+            const text = createElement(
+                "p", "", item.value
+            );
+
+            card.append(heading, text);
+
+            // Дополнительная информация о проекте
+            if (page.type === "projects") {
+
+                const tech = createElement(
+                    "span", "project-tag",
+                    item.tech
+                );
+
+                card.appendChild(tech);
+            }
+        }
+
+        cards.appendChild(card);
+    });
+
+    // Добавление элементов на страницу
+    content.append(tag, title, description, cards);
+
+    // Выделение активной вкладки
+    buttons.forEach(button => {
+
+        const active = button.dataset.page === pageName;
+
+        button.classList.toggle("active", active);
+
+        if (active) {
+            button.setAttribute("aria-current", "page");
+        } else {
+            button.removeAttribute("aria-current");
+        }
+    });
+
+    // Дополнительная функция:
+    // запоминаем последнюю открытую вкладку
+
+    try {
+        localStorage.setItem("lastPortfolioPage", pageName);
+    } catch (error) {
+        console.log("Не удалось сохранить вкладку");
+    }
+}
+
+
+// Обработка нажатий через addEventListener
+
+buttons.forEach(button => {
+
+    button.addEventListener("click", function() {
+
+        const pageName = this.dataset.page;
+
+        showPage(pageName);
+
+    });
+
+});
+
+
+// Восстановление последней вкладки
+
+let savedPage = "about";
+
+try {
+    savedPage = localStorage.getItem("lastPortfolioPage") || "about";
+} catch (error) {
+    savedPage = "about";
+}
+
+
+// Отображение первой страницы
+
+showPage(pages[savedPage] ? savedPage : "about");
