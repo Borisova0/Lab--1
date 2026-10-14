@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Портфолио | Алексей Иванов</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+
+<div class="app">
+
+    <!-- Боковое меню -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-icon">&lt;/&gt;</span>
+            <span>DEV.PORTFOLIO</span>
+        </div>
+
+        <div class="profile">
+            <div class="avatar">AI</div>
+            <h2>Алексей Иванов</h2>
+            <p>Frontend Developer</p>
+            <span class="status">● Открыт к проектам</span>
+        </div>
+
+        <p class="menu-title">НАВИГАЦИЯ</p>
+
+        <nav class="navigation" aria-label="Разделы портфолио">
+            <button class="nav-btn active"
+                    data-page="about">
+                👤 О себе
+            </button>
+
+            <button class="nav-btn"
+                    data-page="skills">
+                💻 Навыки
+            </button>
+
+            <button class="nav-btn"
+                    data-page="projects">
+                📁 Проекты
+            </button>
+
+            <button class="nav-btn"
+                    data-page="contacts">
+                ✉️ Контакты
+            </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>Лабораторная работа №7</p>
+            <p>HTML • CSS • JavaScript</p>
+        </div>
+
+    </aside>
+
+    <!-- Основная часть сайта -->
+    <main class="main">
+
+        <header class="topbar">
+            <span>Студенческое портфолио</span>
+            <span class="year">2026</span>
+        </header>
+
+        <!-- Контент создаётся через JavaScript -->
+        <section id="content" aria-live="polite">
+        </section>
+
+        <footer>
+            <p>© 2026 Алексей Иванов | IT Portfolio</p>
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+</html>
