@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Планировщик занятий (Лабораторная №8)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📅 Планировщик занятий</h1>
+            <p class="subtitle">Ваше расписание с сохранением в LocalStorage</p>
+        </header>
+        
+        <!-- Форма добавления -->
+        <div class="form-card">
+            <div class="input-group">
+                <input type="text" id="subject" placeholder="📚 Предмет (например, Математика)">
+                <input type="text" id="time" placeholder="⏰ Время (например, 10:00 - 11:30)">
+                <input type="text" id="auditory" placeholder="🚪 Аудитория (например, ауд. 405)">
+            </div>
+            <div class="btn-group">
+                <button id="add-btn" class="btn primary">Добавить занятие</button>
+                <button id="clear-all-btn" class="btn danger">Очистить всё</button>
+            </div>
+        </div>
+
+        <!-- Статистика и список -->
+        <div class="list-header">
+            <h3>Список занятий</h3>
+            <span id="counter" class="badge">Всего: 0</span>
+        </div>
+        
+        <ul id="schedule-list"></ul>
+    </div>
+
+    <script src="app.js" defer></script>
+</body>
+</html>
