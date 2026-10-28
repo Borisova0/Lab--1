@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог альбомов</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Каталог альбомов</h1>
+        <p>Выберите альбом, чтобы посмотреть фотографии</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Альбомы</h2>
+            <p id="albumStatus" role="status">Загрузка альбомов...</p>
+            <div id="albums" class="albums"></div>
+        </section>
+
+        <section>
+            <h2 id="photoTitle">Фотографии</h2>
+            <p id="photoStatus" role="status">
+                Выберите альбом
+            </p>
+            <button id="retryButton" hidden>Повторить загрузку</button>
+            <div id="photos" class="photos"></div>
+        </section>
+    </main>
+</body>
+</html>
