@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Quiz — Викторина</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">IT<span>Quiz.</span></div>
+    <span class="header-text">Лабораторная №10</span>
+  </header>
+
+  <main>
+    <p class="tag">ПРОВЕРКА ЗНАНИЙ</p>
+    <h1>Викторина по информатике</h1>
+    <p class="description">
+      Ответьте на 10 вопросов и проверьте свои знания.
+    </p>
+
+    <section class="card" id="startScreen">
+      <p class="label">НАЧАЛО</p>
+      <h2>Добро пожаловать!</h2>
+      <p class="muted">Введите имя, чтобы начать викторину.</p>
+
+      <form id="startForm">
+        <label for="userName">Ваше имя</label>
+        <input id="userName" type="text"
+               placeholder="Введите имя" maxlength="40">
+        <p class="error" id="nameError"></p>
+        <button class="primary" type="submit">
+          Начать викторину →
+        </button>
+      </form>
+    </section>
+
+    <section class="card" id="quizScreen" hidden>
+      <div class="progress-info">
+        <span id="counter"></span>
+        <span id="percent"></span>
+      </div>
+
+      <div class="progress">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <p class="label" id="greeting"></p>
+      <h2 id="questionTitle"></h2>
+      <div id="answerList" class="answers"></div>
+      <p class="error" id="quizError"></p>
+
+      <button class="primary" id="nextBtn"
+              type="button" disabled>
+        Следующий вопрос →
+      </button>
+    </section>
+
+    <section class="card" id="resultScreen" hidden>
+      <div class="check">✓</div>
+      <p class="label">РЕЗУЛЬТАТ</p>
+      <h2 id="resultTitle"></h2>
+      <div class="score" id="resultScore"></div>
+      <p class="muted" id="resultMessage"></p>
+
+      <button class="primary" id="restartBtn"
+              type="button">
+        Пройти заново ↻
+      </button>
+    </section>
+  </main>
+
+  <footer>IT Quiz © 2026 · Учебный проект</footer>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
